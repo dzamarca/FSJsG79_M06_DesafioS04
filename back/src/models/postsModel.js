@@ -17,13 +17,9 @@ export const getPostByIdModel = async (id) => {
 
 export const createPostModel = async (titulo, img, descripcion, likes) => {
     const sqlQuery = 'INSERT INTO posts (titulo, img, descripcion, likes) VALUES ($1, $2, $3, $4) RETURNING *'
-    try {
-        const values = [titulo, img, descripcion, likes]
-        const response = await pool.query(sqlQuery, values)
-        return response.rows
-    } catch (error) {
-        console.error(error)
-    }
+    const values = [titulo, img, descripcion, likes]
+    const response = await pool.query(sqlQuery, values)
+    return response.rows
 }
 
 export const patchLikeModel = async (id, likes) => {
